@@ -18,12 +18,15 @@ export class ProjectService {
   }
 
   async findAllProjects(): Promise<Project[]> {
-    return await this.projectRepository.find();
+    return await this.projectRepository.find({
+      relations: ['employees'], // The name of the f ield() that use in the Project entity to represent the employee relationship
+    });
   }
 
   async findProjectById(id: string): Promise<Project> {
     return await this.projectRepository.findOne({
       where: { id },
+      relations: ['employees'], // The name of the field() that use in the Project entity to represent the employee relationship
     });
   }
 
